@@ -1,23 +1,25 @@
-version: '3.3'
+version: '3.8'
 
 services:
-  postgres:
-    image: postgres:13
-    environment:
-      POSTGRES_DB: postgres_store
-      POSTGRES_USER: itsluismario
-      POSTGRES_PASSWORD: POSTGRES7991
-    ports:
-      - 3001:3001
-    volumes:
+    postgres:
+      image: postgres:13
+      restart: always
+      environment:
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_HOST_AUTH_METHOD=trust
+      ports:
+            - 5432
+      volumes:
       - ./postgres_data:/var/lib/postgresql/data
 
-  pgadmin:
-    image: dpage/pgadmin4
-    environment:
-      PGADMIN_DEFAULT_EMAIL: "root@admin.com"
-      PGADMIN_DEFAULT_PASSWORD: "root"
-    ports:
-      - "5050:80"
-    depends_on:
+    pgadmin:
+      image: dpage/pgadmin4
+      environment:
+      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_EMAIL}
+      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_PASSWORD}
+      ports:
+      - 5050:80
+      depends_on :
       - postgres
