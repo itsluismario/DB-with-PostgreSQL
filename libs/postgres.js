@@ -6,9 +6,9 @@ async function getConnection() {
   const client = new Client({
     host: 'localhost',
     port: 2001,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
+    user: process.env.PGUSER,
+    password: process.env.PGPASSWORD,
+    database: process.env.PGNAME,
   });
   await client.connect();
   return client;

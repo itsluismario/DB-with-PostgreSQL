@@ -5,9 +5,9 @@ services:
       image: postgres:13
       restart: always
       environment:
-      - POSTGRES_DB=${DB_NAME}
-      - POSTGRES_USER=${DB_USER}
-      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${PGNAME}
+      - POSTGRES_USER=${PGUSER}
+      - POSTGRES_PASSWORD=${PGPASSWORD}
       - POSTGRES_HOST_AUTH_METHOD=trust
       ports:
             - 2001:5432
