@@ -38,6 +38,10 @@ const ProductSchema =  {
     allowNull: true,
     type: DataTypes.STRING,
   },
+  image: {
+    allowNull: true,
+    type: DataTypes.STRING,
+  },
   createdAt: {
     allowNull: false,
     type: DataTypes.DATE,

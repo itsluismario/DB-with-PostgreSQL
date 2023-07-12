@@ -7,7 +7,7 @@ const port = process.env.PORT || 3000;
 
 const cors = require('cors');
 
-const { logErrors, errorHandler, boomErrorHandler } = require('./middlewares/error.handler')
+const { logErrors, errorHandler, boomErrorHandler, sqlErrorHandler } = require('./middlewares/error.handler')
 
 // -- Middleware to enable to send json data
 app.use(express.json());
@@ -46,5 +46,6 @@ routerApi(app);
 // -- Middleware must be declared after routing
 // -- Consider which one goes first
 app.use(logErrors);
+app.use(sqlErrorHandler);
 app.use(boomErrorHandler);
 app.use(errorHandler);

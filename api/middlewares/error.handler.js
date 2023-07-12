@@ -21,4 +21,12 @@ function boomErrorHandler(err, req, res, next) {
   }
 }
 
-module.exports = { logErrors, errorHandler, boomErrorHandler }
+const { ValidationError } = require('sequelize');
+
+const sqlErrorHandler = (err, req, res, next) => {
+  if (err instanceof ValidationError)
+    boomErrorHandler(boom.badRequest(err.message), req, res, next);
+  next(err);
+};
+
+module.exports = { logErrors, errorHandler, boomErrorHandler, sqlErrorHandler }

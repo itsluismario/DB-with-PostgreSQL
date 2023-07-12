@@ -22,47 +22,51 @@ class UsersService {
     }
   }
 
-  create(data) {
-    const newUser = {
-      id: faker.string.uuid(),
-      ...data
+  async create(data) {
+    const IsUser = await models.User.findOne({
+        where: {
+          email: data.email
+          }
+      });
+    if (IsUser) {
+      throw boom.conflict('User already exists');
     }
-    this.users.push(newUser);
+    const newUser = await models.User.create(data);
     return newUser;
   }
 
+
   async find() {
-    const response = await models.User.findAll();
-    return response;
+    const data = await models.User.findAll();
+    if(data.length === 0) {
+      throw boom.notFound('There are no users');
+    }
+    return data;
   }
 
-  findOne(id) {
-    const user = this.users.find(user => user.id === id);
+  async findOne(id) {
+    const user = await models.User.findByPk(id);
     if (!user) {
       throw boom.notFound('User not found')
     }
     return user;
   }
 
-  update(id, changes) {
-    const index = this.users.findIndex(user => user.id === id);
-    if (index === -1) {
+  async update(id, changes) {
+    const user = await this.findOne(id);
+    if (!user) {
       throw boom.notFound('User not found')
       }
-    const user = this.users[index];
-    this.users[index] = {
-      ...user,
-      ...changes
-    }
-    return this.users[index];
+    const response = await user.update(changes);
+    return response;
   }
 
-  delete(id) {
-    const index = this.users.findIndex(user => user.id === id);
-    if (index === -1) {
+  async delete(id) {
+    const user = await this.findOne(id);
+    if (!user) {
       throw boom.notFound('User not found')
     }
-    this.users.splice(index, 1)
+    await user.destroy();
     return { id };
   }
 }

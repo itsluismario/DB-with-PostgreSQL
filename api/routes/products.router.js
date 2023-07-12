@@ -9,9 +9,13 @@ const service = new ProductsService();
 // -- Router
 const router = express.Router();
 
-router.get('/', async (req, res) => {
-  const products = await service.find();
-    res.json(products);
+router.get('/', async (req, res, next) => {
+  try {
+    const products = await service.find();
+    res.json(products)
+  } catch (error) {
+    next(error);
+  }
 });
 
 router.get('/filter', (req, res) => {
@@ -32,10 +36,14 @@ router.get('/:id',
 
 router.post('/',
   validatorHandler(createProductSchema, 'body'),
-  async (req, res) => {
-    const body = req.body;
-    const newProduct = await service.create(body);
-    res.status(201).json(newProduct);
+  async (req, res, next) => {
+    try{
+      const body = req.body;
+      const newProduct = await service.create(body);
+      res.status(201).json(newProduct);
+    } catch (error) {
+      next(error);
+    }
 })
 
 router.patch('/:id',
@@ -59,7 +67,7 @@ router.put('/:id',
     try {
       const { id } = req.params;
       const body = req.body;
-      const product = await service.partialUpdate(id, body);
+      const product = await service.update(id, body);
       res.json(product);
     } catch (error) {
       next(error);

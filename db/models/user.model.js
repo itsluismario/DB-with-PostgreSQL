@@ -20,6 +20,11 @@ const UserSchema =  {
         primaryKey: true,
         type: DataTypes.INTEGER,
     },
+    name: {
+      allowNull: false,
+      type: DataTypes.STRING,
+      unique: true,
+    },
     email: {
         allowNull: false,
         type: DataTypes.STRING,
@@ -33,13 +38,13 @@ const UserSchema =  {
         allowNull: false,
         type: DataTypes.DATE,
         field: 'created_at',
-        defaultValue: Sequelize.DATE,
+        defaultValue: Sequelize.NOW,
     },
     updatedAt: {
         allowNull: false,
         type: DataTypes.DATE,
         field: 'updated_at',
-        defaultValue: Sequelize.DATE,
+        defaultValue: Sequelize.NOW,
     },
 };
 

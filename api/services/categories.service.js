@@ -40,17 +40,25 @@ class CategoriesService {
     }
   }
 
-  create(data) {
-    const newCategory = {
-        ...data
+  async create(data) {
+    const IsCategory = await models.Category.findOne({
+      where: {
+        category: data.category
+        }
+    });
+    if (IsCategory) {
+      throw boom.conflict('Category already exists');
     }
-    this.categories.push(newCategory);
+    const newCategory = await models.User.create(data);
     return newCategory;
   }
 
   async find() {
-    const response = await models.Category.findAll();
-    return response;
+    const data = await models.Category.findAll();
+    if(data.length === 0) {
+      throw boom.notFound('There are no categories');
+    }
+    return data;
   }
 
   findOne(categoryId, productId) {

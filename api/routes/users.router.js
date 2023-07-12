@@ -11,9 +11,13 @@ const service = new UsersService();
 const router = express.Router();
 
 
-router.get('/', async (req, res) => {
-  const users = await service.find();
-  res.json(users);
+router.get('/', async (req, res, next) => {
+  try {
+    const users = await service.find();
+    res.json(users);
+  } catch (error) {
+    next(error);
+  }
 });
 
 router.get('/:id',
@@ -21,7 +25,7 @@ router.get('/:id',
   async (req, res, next) => {
     try {
       const { id } = req.params;
-      const user = await service.findOne(id);
+        const user = await service.findOne(id);
       res.json(user);
     } catch (error) {
       next(error);
@@ -30,10 +34,14 @@ router.get('/:id',
 
 router.post('/',
   validatorHandler(createUserSchema, 'body'),
-  async (req, res) => {
-    const body = req.body;
-    const newUser = await service.create(body);
+  async (req, res, next) => {
+    try {
+      const body = req.body;
+      const newUser = await service.create(body);
     res.status(201).json(newUser);
+    } catch (error) {
+      next(error)
+    }
 })
 
 router.patch('/:id',
