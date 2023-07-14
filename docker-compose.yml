@@ -1,25 +1,52 @@
-version: '3.8'
+version: '3.6'
 
 services:
-    postgres:
-      image: postgres:13
+    # postgres:
+    #   image: postgres:13
+    #   restart: always
+    #   environment:
+    #     - POSTGRES_DB=${DB_NAME}
+    #     - POSTGRES_USER=${DB_USER}
+    #     - POSTGRES_PASSWORD=${DB_PASSWORD}
+    #     - POSTGRES_HOST_AUTH_METHOD=trust
+    #   ports:
+    #     - 2002:5432
+    #   volumes:
+    #     - ./postgres_data:/var/lib/postgresql/data
+
+    # pgadmin:
+    #   image: dpage/pgadmin4
+    #   environment:
+    #     - PGADMIN_DEFAULT_EMAIL=${ADMIN_EMAIL}
+    #     - PGADMIN_DEFAULT_PASSWORD=${ADMIN_PASSWORD}
+    #   ports:
+    #     - 5050:80
+    #   depends_on:
+    #     - postgres
+
+    mysql:
+      image: mysql:8.0-oracle
+      platform: linux/amd64
       restart: always
       environment:
-      - POSTGRES_DB=${PGNAME}
-      - POSTGRES_USER=${PGUSER}
-      - POSTGRES_PASSWORD=${PGPASSWORD}
-      - POSTGRES_HOST_AUTH_METHOD=trust
+          - MYSQL_ROOT_HOST=${DB_HOST}
+          - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+          - MYSQL_DATABASE=${DB_NAME}
+          - MYSQL_USER=${DB_USER}
+          - MYSQL_PASSWORD=${DB_PASSWORD}
+          - MYSQL_PORT=${DB_PORT}
       ports:
-            - 2001:5432
+        - 3307:3307
       volumes:
-      - ./postgres_data:/var/lib/postgresql/data
+      - ./mysql_data:/var/lib/mysql
 
-    pgadmin:
-      image: dpage/pgadmin4
+    phpmyadmin:
+      platform: linux/amd64
+      image: phpmyadmin/phpmyadmin
       environment:
-      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_EMAIL}
-      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_PASSWORD}
+        - MYSQL_ROOT_PASSWORD=admin123
+        - PMA_HOST=mysql
       ports:
-      - 5050:80
-      depends_on :
-      - postgres
+        - 8080:80
+
+

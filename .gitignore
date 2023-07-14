@@ -221,3 +221,4 @@ $RECYCLE.BIN/
 npm-debug.log
 /*.env
 postgres_data
+mysql_data
