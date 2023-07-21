@@ -11,7 +11,7 @@ const config = {
   dbPassword: process.env.PGPASSWORD,
   dbHost: process.env.PGHOST,
   dbName: process.env.PGNAME,
-  dbPort: process.env.PGPORT || '5432'
+  dbPort: process.env.PGPORT
 }
 
 module.exports = { config };
