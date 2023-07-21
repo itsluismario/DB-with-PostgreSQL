@@ -1,50 +1,47 @@
-version: '3.6'
+version: '3.8'
 
 services:
-    # postgres:
-    #   image: postgres:13
-    #   restart: always
-    #   environment:
-    #     - POSTGRES_DB=${DB_NAME}
-    #     - POSTGRES_USER=${DB_USER}
-    #     - POSTGRES_PASSWORD=${DB_PASSWORD}
-    #     - POSTGRES_HOST_AUTH_METHOD=trust
-    #   ports:
-    #     - 2002:5432
-    #   volumes:
-    #     - ./postgres_data:/var/lib/postgresql/data
-
-    # pgadmin:
-    #   image: dpage/pgadmin4
-    #   environment:
-    #     - PGADMIN_DEFAULT_EMAIL=${ADMIN_EMAIL}
-    #     - PGADMIN_DEFAULT_PASSWORD=${ADMIN_PASSWORD}
-    #   ports:
-    #     - 5050:80
-    #   depends_on:
-    #     - postgres
-
-    mysql:
-      image: mysql:8.0-oracle
-      platform: linux/amd64
+    postgres:
+      image: postgres:13
       restart: always
       environment:
-          - MYSQL_ROOT_HOST=${DB_HOST}
-          - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
-          - MYSQL_DATABASE=${DB_NAME}
-          - MYSQL_USER=${DB_USER}
-          - MYSQL_PASSWORD=${DB_PASSWORD}
-          - MYSQL_PORT=${DB_PORT}
+        - POSTGRES_DB=${DB_NAME}
+        - POSTGRES_USER=${DB_USER}
+        - POSTGRES_PASSWORD=${DB_PASSWORD}
       ports:
-        - 3307:3307
+        - 2001:5432
       volumes:
-      - ./mysql_data:/var/lib/mysql
+        - ./postgres_data:/var/lib/postgresql/data
+
+    pgadmin:
+      image: dpage/pgadmin4
+      environment:
+        - PGADMIN_DEFAULT_EMAIL=${PGADMIN_EMAIL}
+        - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_PASSWORD}
+      ports:
+        - 5050:80
+      depends_on :
+        - postgres
+
+    mysql:
+      platform: linux/amd64
+      image: mysql
+      environment:
+        - MYSQL_DATABASE=${DB_NAME}
+        - MYSQL_USER=${DB_USER}
+        - MYSQL_PASSWORD=${DB_PASSWORD}
+        - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+        - MYSQL_PORT=3307
+      ports:
+        - 3307:3306
+      volumes:
+        - ./mysql_data:/var/lib/mysql
 
     phpmyadmin:
       platform: linux/amd64
       image: phpmyadmin/phpmyadmin
       environment:
-        - MYSQL_ROOT_PASSWORD=admin123
+        - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
         - PMA_HOST=mysql
       ports:
         - 8080:80
