@@ -66,7 +66,10 @@ class Product extends Model {
   // Dont have to declare the obj to have acces to the objects
   static associate(models) {
     // associate
-    this.belongsTo(models.Category, { as: 'category' });
+    this.belongsTo(models.Category, {
+      as: 'category',
+      foreignKey: 'id'
+    });
   }
 
   static config(sequelize) {

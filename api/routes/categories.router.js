@@ -2,7 +2,7 @@ const express = require('express');
 const CategoriesService = require('../services/categories.service')
 const validatorHandler = require('../middlewares/validator.handler');
 const { createCategorySchema, updateCategorySchema, parcialUpdateCategorySchema,
-getCategorySchema, getProductByCategorySchema, deleteCategorySchema } = require('../schemas/categories.schema');
+getCategorySchema, deleteCategorySchema } = require('../schemas/categories.schema');
 
 // -- Service
 const service = new CategoriesService();
@@ -19,12 +19,12 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-router.get('/:categoryId/products/:productId',
-  validatorHandler(getProductByCategorySchema, 'params'),
+router.get('/:id/',
+  validatorHandler(getCategorySchema, 'params'),
   async (req, res, next) => {
     try {
-      const { categoryId, productId } = req.params;
-      const product = await service.findOne( categoryId, productId);
+      const { id } = req.params;
+      const product = await service.findOne(id);
       res.json(product);
     } catch (error) {
       next(error);
@@ -43,40 +43,40 @@ router.post('/',
     }
 });
 
-router.patch('/:categoryId',
+router.patch('/:id',
   validatorHandler(getCategorySchema, 'params'),
   validatorHandler(parcialUpdateCategorySchema, 'body'),
   async (req, res, next) => {
     try {
-      const { categoryId } = req.params;
+      const { id } = req.params;
       const body = req.body;
-      const category = await service.update(categoryId, body);
+      const category = await service.update(id, body);
       res.json(category);
     } catch (error) {
       next(error);
     }
 });
 
-router.put('/:categoryId',
+router.put('/:id',
   validatorHandler(getCategorySchema, 'params'),
   validatorHandler(updateCategorySchema, 'body'),
   async (req, res, next) => {
     try {
-      const { categoryId } = req.params;
+      const { id } = req.params;
       const body = req.body;
-      const category = await service.update(categoryId, body);
+      const category = await service.update(id, body);
       res.json(category);
     } catch (error) {
       next(error);
     }
 });
 
-router.delete('/:categoryId',
+router.delete('/:id',
   validatorHandler(deleteCategorySchema, 'params'),
   async (req, res, next) => {
     try {
-      const { categoryId } = req.params;
-      const response = await service.delete(categoryId);
+      const { id } = req.params;
+      const response = await service.delete(id);
       res.json(response);
     } catch (error) {
       next(error);

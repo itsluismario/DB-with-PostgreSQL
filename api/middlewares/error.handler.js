@@ -22,11 +22,14 @@ function boomErrorHandler(err, req, res, next) {
   }
 }
 
-const { ValidationError } = require('sequelize');
+const { ValidationError, ForeignKeyConstraintError } = require('sequelize');
 
 const sqlErrorHandler = (err, req, res, next) => {
-  if (err instanceof ValidationError)
+  if (err instanceof ValidationError) {
     boomErrorHandler(boom.badRequest(err.message), req, res, next);
+  } else if(err instanceof ForeignKeyConstraintError && err.isBoom ) {
+    boomErrorHandler(boom.badRequest(err.message), req, res, next);
+  }
   next(err);
 };
 

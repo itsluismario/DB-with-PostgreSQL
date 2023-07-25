@@ -1,28 +1,10 @@
-const { faker } = require('@faker-js/faker');
 const boom  = require('@hapi/boom');
 
 const { models } = require('../../libs/sequelize');
 
 class ProductsService {
 
-  constructor() {
-    this.products = [];
-    this.generate();
-  }
-
-  generate() {
-    const limit = 100;
-
-    for (let index = 0; index < limit; index++) {
-      this.products.push({
-        id: faker.string.uuid(),
-        name: faker.commerce.productName(),
-        price: parseInt(faker.commerce.price(), 10),
-        image: faker.image.url(),
-        isBlock: faker.datatype.boolean()
-      });
-    }
-  }
+  constructor() {}
 
   async create(data) {
     const IsProduct = await models.Product.findOne({
@@ -38,7 +20,9 @@ class ProductsService {
   }
 
   async find() {
-    const data = await models.Product.findAll();
+    const data = await models.Product.findAll({
+      include: ['category']
+    });
     if(data.length === 0) {
       throw boom.notFound('There are no products');
     }
