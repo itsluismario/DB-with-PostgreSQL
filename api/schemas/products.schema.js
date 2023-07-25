@@ -6,29 +6,33 @@ const stockNumber = Joi.number().integer();
 const category = Joi.string().min(3).max(15);
 const price = Joi.number().integer().min(10);
 const image = Joi.string().uri();
+const description = Joi.string().min(10);
 
 const createProductSchema = Joi.object({
   productName: productName.required(),
   price: price.required(),
+  description: description.required(),
   stockNumber: stockNumber.required(),
   category: category.required(),
-  image: image.required()
+  image: image.required(),
 });
 
 const parcialUpdateProductSchema = Joi.object({
   productName: productName,
   price: price,
+  description: description,
   stockNumber: stockNumber,
   category: category,
-  image: image
+  image: image,
 });
 
 const updateProductSchema = Joi.object({
   productName: productName.required(),
   price: price.required(),
+  description: description.required(),
   stockNumber: stockNumber.required(),
   category: category.required(),
-  image: image.required()
+  image: image.required(),
 });
 
 const getProductSchema = Joi.object({

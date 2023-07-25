@@ -1,5 +1,5 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
-
+const { CATEGORY_TABLE } = require('./category.model');
 /**
  * @description description of each field in the table
  * @typedef {Object} field definition
@@ -25,13 +25,17 @@ const ProductSchema =  {
     type: DataTypes.STRING,
     field: 'product_name',
   },
+  description: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
   price: {
     allowNull: false,
-    type: DataTypes.REAL
+    type: DataTypes.INTEGER
   },
   stockNumber: {
     allowNull: true,
-    type: DataTypes.REAL,
+    type: DataTypes.INTEGER,
     field: 'stock_number',
   },
   category: {
@@ -47,7 +51,18 @@ const ProductSchema =  {
     type: DataTypes.DATE,
     field: 'create_at',
     defaultValue: Sequelize.NOW
-  }
+  },
+  categoryId: {
+    allowNull: false,
+    type: DataTypes.INTEGER,
+    field: 'categoy_id',
+    references: {
+      model: CATEGORY_TABLE,
+      key: 'id'
+    },
+    onUpdate: 'CASCADE',
+    onDelete: 'SET NULL'
+  },
 };
 
 // You can do queries with Extend Model
@@ -55,6 +70,7 @@ class Product extends Model {
   // Dont have to declare the obj to have acces to the objects
   static associate() {
     // associate
+    this.belongsTo(models.Category, { as: 'category' });
   }
 
   static config(sequelize) {

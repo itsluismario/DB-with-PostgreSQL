@@ -1,43 +1,29 @@
 const Joi = require('joi');
 
-const productId = Joi.string().uuid();
-const categoryId = Joi.string().uuid();
-const category = Joi.string().min(3).max(35);
-const price = Joi.number().integer().min(10);
-
-const productSchema = Joi.object({
-  // productId: productId.required(),
-  category: category.required(),
-  price: price.required()
-});
+const id = Joi.number().integer();
+const name = Joi.string().min(3).max(15);
+const image = Joi.string().uri();
 
 const createCategorySchema = Joi.object({
-  // categoryId: categoryId.required(),
-  category: category.required(),
-  // products: Joi.array().items(productSchema).required()
+  name: name.required(),
+  image: image.required()
 });
 
 const parcialUpdateCategorySchema = Joi.object({
-  category: category,
-  // products: Joi.array().items(productSchema)
+  name: name,
+  image: image
 });
 
 const updateCategorySchema = Joi.object({
   category: category.required(),
-  // products: Joi.array().items(productSchema).required()
 });
 
 const getCategorySchema = Joi.object({
-  categoryId: categoryId.required()
-});
-
-const getProductByCategorySchema = Joi.object({
-  // productId: productId.required(),
-  categoryId: categoryId.required(),
+  id: id.required()
 });
 
 const deleteCategorySchema = Joi.object({
-  categoryId: categoryId.required()
+  id: id.required()
 });
 
 module.exports = { createCategorySchema, updateCategorySchema, parcialUpdateCategorySchema, getCategorySchema, getProductByCategorySchema,deleteCategorySchema }
