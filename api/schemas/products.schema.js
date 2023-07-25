@@ -3,7 +3,6 @@ const Joi = require('joi');
 const id = Joi.number().integer();
 const productName = Joi.string().min(3).max(15);
 const stockNumber = Joi.number().integer();
-const category = Joi.string().min(3).max(15);
 const price = Joi.number().integer().min(10);
 const image = Joi.string().uri();
 const description = Joi.string().min(10);
@@ -13,7 +12,6 @@ const createProductSchema = Joi.object({
   price: price.required(),
   description: description.required(),
   stockNumber: stockNumber.required(),
-  category: category.required(),
   image: image.required(),
 });
 
@@ -22,7 +20,6 @@ const parcialUpdateProductSchema = Joi.object({
   price: price,
   description: description,
   stockNumber: stockNumber,
-  category: category,
   image: image,
 });
 
@@ -31,7 +28,6 @@ const updateProductSchema = Joi.object({
   price: price.required(),
   description: description.required(),
   stockNumber: stockNumber.required(),
-  category: category.required(),
   image: image.required(),
 });
 

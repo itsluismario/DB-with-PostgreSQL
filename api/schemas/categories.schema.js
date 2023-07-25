@@ -15,7 +15,8 @@ const parcialUpdateCategorySchema = Joi.object({
 });
 
 const updateCategorySchema = Joi.object({
-  category: category.required(),
+  name: name.required(),
+  image: image.required()
 });
 
 const getCategorySchema = Joi.object({
@@ -26,4 +27,4 @@ const deleteCategorySchema = Joi.object({
   id: id.required()
 });
 
-module.exports = { createCategorySchema, updateCategorySchema, parcialUpdateCategorySchema, getCategorySchema, getProductByCategorySchema,deleteCategorySchema }
+module.exports = { createCategorySchema, updateCategorySchema, parcialUpdateCategorySchema, getCategorySchema, deleteCategorySchema }
