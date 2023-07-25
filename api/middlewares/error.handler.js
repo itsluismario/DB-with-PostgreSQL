@@ -1,3 +1,4 @@
+const boom = require('@hapi/boom');
 // -- Catch any error
 // -- Middleware error type
 function logErrors(err, req, res, next) {
