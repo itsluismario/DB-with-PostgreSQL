@@ -38,10 +38,6 @@ const ProductSchema =  {
     type: DataTypes.INTEGER,
     field: 'stock_number',
   },
-  category: {
-    allowNull: true,
-    type: DataTypes.STRING,
-  },
   image: {
     allowNull: true,
     type: DataTypes.STRING,
@@ -68,7 +64,7 @@ const ProductSchema =  {
 // You can do queries with Extend Model
 class Product extends Model {
   // Dont have to declare the obj to have acces to the objects
-  static associate() {
+  static associate(models) {
     // associate
     this.belongsTo(models.Category, { as: 'category' });
   }

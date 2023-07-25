@@ -56,8 +56,12 @@ const UserSchema =  {
 // You can do queries with Extend Model
 class User extends Model {
   // Dont have to declare the obj to have acces to the objects
-  static associate() {
+  static associate(models) {
     // associate
+    this.hasOne(models.Customer, {
+      as: 'customer',
+      foreignKey: 'userId'
+    });
   }
 
   static config(sequelize) {
