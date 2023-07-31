@@ -19,10 +19,16 @@ class ProductsService {
     return newProduct;
   }
 
-  async find() {
-    const data = await models.Product.findAll({
-      include: ['category']
-    });
+  async find(query) {
+    const options = {
+      include: ['category'],
+    }
+    const { limit, offset } = query;
+    if ( limit && offset ) {
+      options.limit = limit;
+      options.offset = offset;
+    }
+    const data = await models.Product.findAll(options);
     if(data.length === 0) {
       throw boom.notFound('There are no products');
     }
