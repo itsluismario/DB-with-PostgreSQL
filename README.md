@@ -1,10 +1,10 @@
 <p align="center">
-  <a href="https://static.platzi.com/media/achievements/badge-backend-nodejs-apirest-expressjs-3fc7bca3-8dcb-459c-9638-12c92d502f5f.png" target="_blank">
-    <img alt="Curso de Backend con Node.js: API REST con Express.js" src="https://static.platzi.com/media/achievements/badge-backend-nodejs-apirest-expressjs-3fc7bca3-8dcb-459c-9638-12c92d502f5f.png" width="60" />
+  <a href="https://static.platzi.com/cdn-cgi/image/width=1024,quality=50,format=auto/media/achievements/backend-node-82a9a4bf-7ce4-4437-86f6-c39dcce17d15.png" target="_blank">
+    <img alt="Curso de Backend con Node.js: Base de Datos con PostgreSQL" src="https://static.platzi.com/cdn-cgi/image/width=1024,quality=50,format=auto/media/achievements/backend-node-82a9a4bf-7ce4-4437-86f6-c39dcce17d15.png" width="60" />
   </a>
 </p>
 <h1 align="center">
-  Curso de Backend con Node.js: API REST con Express.js
+Curso de Backend con Node.js: Base de Datos con PostgreSQL
 </h1>
 <p align="center">
   <a href="https://api-rest-with-express.vercel.app/api/" target="_blank">
@@ -12,7 +12,7 @@
   </a>
 </p>
 
-[Curso de Backend con Node.js: API REST con Express.js](https://platzi.com/cursos/backend-nodejs/) hecho por [@itsluismario](https://twitter.com/itsluismario) 
+[Curso de Backend con Node.js: Base de Datos con PostgreSQL](https://platzi.com/cursos/backend-nodejs-postgres/) hecho por [@itsluismario](https://twitter.com/itsluismario) 
 
 * [Guía rápida](#-gu%C3%ADa-rápida)
 * [Logros](#-logros)
@@ -146,12 +146,12 @@
 
 ### 🚀 Logros
 
-1. Desarrollar backend con Node.js
-2. Trabajar con rutas, servidores y middlewares de Express.js
-3. Construir una API REST
-4. Manipular errores en la aplicación
-5. Realiza validación de datos
-6. Despliegar la aplicación en producción utilizando Heroku y Vercel
+  1. Aprender sobre la persistencia de datos en Node.js utilizando PostgreSQL como base de datos relacional.
+  2. Conectar tu API REST con la base de datos relacional usando Sequelize, el ORM más popular en el entorno JavaScript.
+  3. Dominar el uso de Sequelize para realizar consultas, establecer relaciones entre tablas y realizar migraciones en tu aplicación.
+  4. Resolver problemas avanzados relacionados con migraciones entre Sequelize, Heroku y Node.js.
+    5. Trabajar en Postgres utilizando diversas interfaces, como interfaces gráficas, la terminal y código JavaScript.
+  6. Configurar tu entorno de desarrollo con Docker, lo que facilita la configuración y gestión del ambiente de desarrollo para tu proyecto.
 
 
 ### Para probarlo
@@ -159,10 +159,14 @@
 
   Para acceder a cada ruta es de la siguiente manera:
 
-  - Categories: https://api-rest-with-express.vercel.app/api/v1/categories/ 
+  - Categories: https://infinite-stream-05645-50dbc7bba9fc.herokuapp.com/api/v1/categories/ 
 
-  - Products: https://api-rest-with-express.vercel.app/api/v1/products/
+  - Products: https://infinite-stream-05645-50dbc7bba9fc.herokuapp.com/api/v1/products/
   
-  - Users: https://api-rest-with-express.vercel.app/api/v1/users/
+  - Users: https://infinite-stream-05645-50dbc7bba9fc.herokuapp.com/api/v1/users/
+
+  - Customers: https://infinite-stream-05645-50dbc7bba9fc.herokuapp.com/api/v1/customers/
+
+  - Orders: https://infinite-stream-05645-50dbc7bba9fc.herokuapp.com/api/v1/orders/
    
 Happy hacking!
