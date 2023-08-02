@@ -13,7 +13,7 @@ const { logErrors, errorHandler, boomErrorHandler, sqlErrorHandler } = require('
 app.use(express.json());
 
 // -- App has always two params
-app.get('/api/', (req, res) => {
+app.get('/', (req, res) => {
   res.send('Hi, my server in express');
 });
 
