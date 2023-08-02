@@ -10,8 +10,10 @@ module.exports = {
   production: {
     url: dbUrl,
     dialect: `${dbDriver}`,
-    ssl: {
-      rejectUnauthorized: false
+    dialectOptions: {
+      ssl: {
+        rejectUnauthorized: false
+      }
     }
   }
 }
