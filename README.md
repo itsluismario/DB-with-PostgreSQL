@@ -7,8 +7,8 @@
 Curso de Backend con Node.js: Base de Datos con PostgreSQL
 </h1>
 <p align="center">
-  <a href="https://api-rest-with-express.vercel.app/api/" target="_blank">
-    https://api-rest-with-express.vercel.app/api/
+  <a href="https://infinite-stream-05645-50dbc7bba9fc.herokuapp.com/api/v1/" target="_blank">
+    https://infinite-stream-05645-50dbc7bba9fc.herokuapp.com/api/v1/
   </a>
 </p>
 
@@ -112,7 +112,17 @@ Curso de Backend con Node.js: Base de Datos con PostgreSQL
 
   ```
   "dependencies": {
-      "express": "^4.18.2"
+      "@faker-js/faker": "^8.0.2",
+      "@hapi/boom": "^10.0.1",
+      "cors": "^2.8.5",
+      "dotenv": "^16.3.1",
+      "express": "^4.18.2",
+      "joi": "^17.9.2",
+      "mysql2": "^3.5.1",
+      "pg": "^8.11.1",
+      "pg-hstore": "^2.3.4",
+      "sequelize": "^6.32.1",
+      "sequelize-cli": "^6.6.1"
     },
     "devDependencies": {
       "eslint": "^8.43.0",
