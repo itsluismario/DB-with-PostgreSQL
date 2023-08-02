@@ -20,11 +20,6 @@ const UserSchema =  {
         primaryKey: true,
         type: DataTypes.INTEGER,
     },
-    name: {
-      allowNull: false,
-      type: DataTypes.STRING,
-      unique: true,
-    },
     email: {
         allowNull: false,
         type: DataTypes.STRING,
